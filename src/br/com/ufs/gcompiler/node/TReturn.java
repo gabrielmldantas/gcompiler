@@ -7,14 +7,14 @@ import br.com.ufs.gcompiler.analysis.*;
 @SuppressWarnings("nls")
 public final class TReturn extends Token
 {
-    public TReturn()
+    public TReturn(String text)
     {
-        super.setText("return");
+        setText(text);
     }
 
-    public TReturn(int line, int pos)
+    public TReturn(String text, int line, int pos)
     {
-        super.setText("return");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,12 @@ public final class TReturn extends Token
     @Override
     public Object clone()
     {
-      return new TReturn(getLine(), getPos());
+      return new TReturn(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTReturn(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TReturn text.");
     }
 }

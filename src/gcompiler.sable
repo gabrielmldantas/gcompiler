@@ -27,19 +27,18 @@ Helpers
     comment = line_comment | blk_comment;
   
 Tokens
+    type = int | string;
+    void = void;
+    if = if;
+    else = else;
+    return = return;
+    while = while;
+    
 	num = digit digit*;
     id = letter letter*;
     blank = blank;
     comment = comment;
-    
-    int = int;
-    string = string;
-    void = void;
-    type = int | string | void;
-    if = 'if';
-    else = 'else';
-    return = 'return';
-    while = 'while';
+    string_literal = '"' not_line_break* '"';
     
     plus = '+';
     minus = '-';

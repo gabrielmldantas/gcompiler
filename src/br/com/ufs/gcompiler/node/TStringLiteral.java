@@ -5,14 +5,14 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TInt extends Token
+public final class TStringLiteral extends Token
 {
-    public TInt(String text)
+    public TStringLiteral(String text)
     {
         setText(text);
     }
 
-    public TInt(String text, int line, int pos)
+    public TStringLiteral(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TInt extends Token
     @Override
     public Object clone()
     {
-      return new TInt(getText(), getLine(), getPos());
+      return new TStringLiteral(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTInt(this);
+        ((Analysis) sw).caseTStringLiteral(this);
     }
 }
