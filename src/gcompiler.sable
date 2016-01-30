@@ -1,0 +1,16 @@
+Package gcompiler; 
+
+Helpers 
+    digit = ['0' .. '9']; 
+    sp = 10 | 10 13 | 9 | 32;
+    letter = ['a' .. 'z'] | ['A' .. 'Z'];
+    semi = ';'; 
+  
+Tokens
+	num = digit digit*;
+    id = letter letter*;
+    plus = '+';
+    minus = '-';
+    blank = sp+;
+    type = 'int' | 'string' | 'void';
+    semi = semi+;
