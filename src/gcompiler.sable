@@ -1,16 +1,68 @@
-Package gcompiler; 
+Package br.com.ufs.gcompiler; 
 
 Helpers 
-    digit = ['0' .. '9']; 
-    sp = 10 | 10 13 | 9 | 32;
-    letter = ['a' .. 'z'] | ['A' .. 'Z'];
-    semi = ';'; 
+    digit = ['0' .. '9'];
+    letter = ['a' .. 'z'] | ['A' .. 'Z']; 
+    tab = 9;
+    cr = 13;
+    lf = 10;
+    eol = cr lf | cr | lf;
+    blank = (' ' | tab | eol)+;
+    all = [0 .. 0xFFFF];
+    not_line_break = [all - [cr + lf]];
+    not_star = [all - '*'];
+    not_star_slash = [not_star - '/'];
+    semi = ';';
+
+	int = 'int';
+	void = 'void';
+	string = 'string';
+	while = 'while';
+	if = 'if';
+	else = 'else';
+	return = 'return';
+    
+    line_comment = '//' not_line_break* eol;
+    blk_comment = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
+    comment = line_comment | blk_comment;
   
 Tokens
 	num = digit digit*;
     id = letter letter*;
+    blank = blank;
+    comment = comment;
+    
+    int = int;
+    string = string;
+    void = void;
+    type = int | string | void;
+    if = 'if';
+    else = 'else';
+    return = 'return';
+    while = 'while';
+    
     plus = '+';
     minus = '-';
-    blank = sp+;
-    type = 'int' | 'string' | 'void';
+    division = '/';
+    multiplication = '*';
+    less_than = '<';
+    less_than_or_eq = '<=';
+    greater_than = '>';
+    greather_than_or_eq = '>=';
+    equals = '==';
+    not_equals = '!=';
+    assign = '=';
     semi = semi+;
+    comma = ',';
+    left_parenthesis = '(';
+    right_parenthesis = ')';
+    left_bracket = '[';
+    right_bracket = ']';
+    left_brace = '{';
+    right_brace = '}';
+    
+Ignored Tokens
+	blank,
+	comment;
+    
+    
