@@ -11,7 +11,7 @@ import br.com.ufs.gcompiler.node.Token;
 
 public class Main {
 	public static void main(String[] args) throws LexerException, IOException {
-		Lexer lexer = new Lexer(new PushbackReader(new FileReader(args[0])));
+		Lexer lexer = new Lexer(new PushbackReader(new FileReader(args[0]), 1024));
 		Token token = lexer.next();
 		int lastLine = token.getLine();
 		System.out.print("Linha " + lastLine + ":");
