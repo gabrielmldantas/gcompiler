@@ -8,7 +8,7 @@ Helpers
     lf = 10;
     eol = cr lf | cr | lf;
     blank = (' ' | tab | eol)+;
-    all = [0 .. 0xFFFF];
+    all = [0 .. 0xFF];
     not_line_break = [all - [cr + lf]];
     not_star = [all - '*'];
     not_star_slash = [not_star - '/'];
