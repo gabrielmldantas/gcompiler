@@ -5,14 +5,14 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TType extends Token
+public final class TBlkCommentBody extends Token
 {
-    public TType(String text)
+    public TBlkCommentBody(String text)
     {
         setText(text);
     }
 
-    public TType(String text, int line, int pos)
+    public TBlkCommentBody(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TType extends Token
     @Override
     public Object clone()
     {
-      return new TType(getText(), getLine(), getPos());
+      return new TBlkCommentBody(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTType(this);
+        ((Analysis) sw).caseTBlkCommentBody(this);
     }
 }

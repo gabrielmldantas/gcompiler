@@ -23,45 +23,57 @@ Helpers
 	return = 'return';
     
     line_comment = '//' not_line_break* eol;
-    blk_comment = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
-    comment = line_comment | blk_comment;
+    blk_comment_start = '/*';
+  
+States
+	normal,
+	comment;
   
 Tokens
-    type = int | string;
-    void = void;
-    if = if;
-    else = else;
-    return = return;
-    while = while;
+{normal}    int = int;
+{normal}    string = string;
+{normal}    void = void;
+{normal}    if = if;
+{normal}    else = else;
+{normal}    return = return;
+{normal}    while = while;
     
-	num = digit digit*;
-    id = letter letter*;
-    blank = blank;
-    comment = comment;
-    string_literal = '"' not_line_break* '"';
+{normal}	num = digit+;
+{normal}    id = letter+;
+{normal}    blank = blank;
+{normal}    string_literal = '"' not_line_break* '"';
     
-    plus = '+';
-    minus = '-';
-    division = '/';
-    multiplication = '*';
-    less_than = '<';
-    less_than_or_eq = '<=';
-    greater_than = '>';
-    greather_than_or_eq = '>=';
-    equals = '==';
-    not_equals = '!=';
-    assign = '=';
-    semi = semi+;
-    comma = ',';
-    left_parenthesis = '(';
-    right_parenthesis = ')';
-    left_bracket = '[';
-    right_bracket = ']';
-    left_brace = '{';
-    right_brace = '}';
+{normal}    plus = '+';
+{normal}    minus = '-';
+{normal}    division = '/';
+{normal}    multiplication = '*';
+{normal}    less_than = '<';
+{normal}    less_than_or_eq = '<=';
+{normal}    greater_than = '>';
+{normal}    greather_than_or_eq = '>=';
+{normal}    equals = '==';
+{normal}    not_equals = '!=';
+{normal}    assign = '=';
+{normal}    semi = semi+;
+{normal}    comma = ',';
+{normal}    left_parenthesis = '(';
+{normal}    right_parenthesis = ')';
+{normal}    left_bracket = '[';
+{normal}    right_bracket = ']';
+{normal}    left_brace = '{';
+{normal}    right_brace = '}';
+
+{normal}	line_comment = line_comment;
+
+{normal->comment, comment}	blk_comment = blk_comment_start;
+{comment, normal}	blk_comment_end = '*/';
+{comment}	blk_comment_body = not_star_slash*;
+{comment}	star = '*';
+{comment}	slash = '/';
+
     
 Ignored Tokens
 	blank,
-	comment;
+	line_comment;
     
     

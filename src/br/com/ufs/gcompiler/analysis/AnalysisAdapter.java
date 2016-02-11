@@ -69,7 +69,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTType(TType node)
+    public void caseTInt(TInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTString(TString node)
     {
         defaultCase(node);
     }
@@ -118,12 +124,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTBlank(TBlank node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTComment(TComment node)
     {
         defaultCase(node);
     }
@@ -244,6 +244,42 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTRightBrace(TRightBrace node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTLineComment(TLineComment node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTBlkComment(TBlkComment node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTBlkCommentEnd(TBlkCommentEnd node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTBlkCommentBody(TBlkCommentBody node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTStar(TStar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSlash(TSlash node)
     {
         defaultCase(node);
     }
