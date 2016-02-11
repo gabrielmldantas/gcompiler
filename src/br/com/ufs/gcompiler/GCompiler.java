@@ -18,7 +18,7 @@ public class GCompiler {
 	
 	public static void main(String[] args) throws IOException {
 		if (args.length == 0) {
-			System.err.println("Usage: java GCompiler <file>");
+			System.err.println("Usage: java br.com.ufs.gcompiler.GCompiler <file>");
 			System.exit(-1);
 		}
 		
