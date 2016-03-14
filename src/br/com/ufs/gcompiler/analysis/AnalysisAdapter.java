@@ -69,6 +69,84 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseStart(Start node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAProgram(AProgram node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASequenceDeclList(ASequenceDeclList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASingleDeclList(ASingleDeclList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDecl(AVarDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFuncDecl(AFuncDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIntTypeSpec(AIntTypeSpec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVoidTypeSpec(AVoidTypeSpec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAStringTypeSpec(AStringTypeSpec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASequenceParams(ASequenceParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASingleParams(ASingleParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParam(AParam node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACompoundStmt(ACompoundStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTInt(TInt node)
     {
         defaultCase(node);

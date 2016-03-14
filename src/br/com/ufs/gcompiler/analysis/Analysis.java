@@ -11,6 +11,20 @@ public interface Analysis extends Switch
     Object getOut(Node node);
     void setOut(Node node, Object o);
 
+    void caseStart(Start node);
+    void caseAProgram(AProgram node);
+    void caseASequenceDeclList(ASequenceDeclList node);
+    void caseASingleDeclList(ASingleDeclList node);
+    void caseAVarDecl(AVarDecl node);
+    void caseAFuncDecl(AFuncDecl node);
+    void caseAIntTypeSpec(AIntTypeSpec node);
+    void caseAVoidTypeSpec(AVoidTypeSpec node);
+    void caseAStringTypeSpec(AStringTypeSpec node);
+    void caseASequenceParams(ASequenceParams node);
+    void caseASingleParams(ASingleParams node);
+    void caseAParam(AParam node);
+    void caseACompoundStmt(ACompoundStmt node);
+
     void caseTInt(TInt node);
     void caseTString(TString node);
     void caseTVoid(TVoid node);

@@ -76,4 +76,11 @@ Ignored Tokens
 	blank,
 	line_comment;
     
-    
+Productions
+	program = decl_list;
+	decl_list = {sequence} decl_list decl | {single} decl;
+	decl = {var} type_spec id semi | {func} type_spec id left_parenthesis params right_parenthesis compound_stmt;
+	type_spec = {int} int | {void} void | {string} string;
+	params = {sequence} params comma param | {single} param;
+	param = type_spec id;
+	compound_stmt = left_brace right_brace;
