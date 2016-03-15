@@ -5,14 +5,14 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TGreatherThanOrEq extends Token
+public final class TGreaterThanOrEq extends Token
 {
-    public TGreatherThanOrEq()
+    public TGreaterThanOrEq()
     {
         super.setText(">=");
     }
 
-    public TGreatherThanOrEq(int line, int pos)
+    public TGreaterThanOrEq(int line, int pos)
     {
         super.setText(">=");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TGreatherThanOrEq extends Token
     @Override
     public Object clone()
     {
-      return new TGreatherThanOrEq(getLine(), getPos());
+      return new TGreaterThanOrEq(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTGreatherThanOrEq(this);
+        ((Analysis) sw).caseTGreaterThanOrEq(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TGreatherThanOrEq text.");
+        throw new RuntimeException("Cannot change TGreaterThanOrEq text.");
     }
 }

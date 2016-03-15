@@ -5,46 +5,46 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASingleDeclList extends PDeclList
+public final class ADivisionMulop extends PMulop
 {
-    private PDecl _decl_;
+    private TDivision _division_;
 
-    public ASingleDeclList()
+    public ADivisionMulop()
     {
         // Constructor
     }
 
-    public ASingleDeclList(
-        @SuppressWarnings("hiding") PDecl _decl_)
+    public ADivisionMulop(
+        @SuppressWarnings("hiding") TDivision _division_)
     {
         // Constructor
-        setDecl(_decl_);
+        setDivision(_division_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASingleDeclList(
-            cloneNode(this._decl_));
+        return new ADivisionMulop(
+            cloneNode(this._division_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASingleDeclList(this);
+        ((Analysis) sw).caseADivisionMulop(this);
     }
 
-    public PDecl getDecl()
+    public TDivision getDivision()
     {
-        return this._decl_;
+        return this._division_;
     }
 
-    public void setDecl(PDecl node)
+    public void setDivision(TDivision node)
     {
-        if(this._decl_ != null)
+        if(this._division_ != null)
         {
-            this._decl_.parent(null);
+            this._division_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ASingleDeclList extends PDeclList
             node.parent(this);
         }
 
-        this._decl_ = node;
+        this._division_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._decl_);
+            + toString(this._division_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._decl_ == child)
+        if(this._division_ == child)
         {
-            this._decl_ = null;
+            this._division_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ASingleDeclList extends PDeclList
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._decl_ == oldChild)
+        if(this._division_ == oldChild)
         {
-            setDecl((PDecl) newChild);
+            setDivision((TDivision) newChild);
             return;
         }
 

@@ -50,7 +50,7 @@ Tokens
 {normal}    less_than = '<';
 {normal}    less_than_or_eq = '<=';
 {normal}    greater_than = '>';
-{normal}    greather_than_or_eq = '>=';
+{normal}    greater_than_or_eq = '>=';
 {normal}    equals = '==';
 {normal}    not_equals = '!=';
 {normal}    assign = '=';
@@ -78,9 +78,26 @@ Ignored Tokens
     
 Productions
 	program = decl_list;
-	decl_list = {sequence} decl_list decl | {single} decl;
-	decl = {var} type_spec id semi | {func} type_spec id left_parenthesis params right_parenthesis compound_stmt;
+	decl_list = decl+;
+	decl = {var_decl} var_decl | {func_decl} func_decl;
+	var_decl = type_spec id semi;
+	func_decl = type_spec id left_parenthesis params right_parenthesis compound_stmt;
 	type_spec = {int} int | {void} void | {string} string;
-	params = {sequence} params comma param | {single} param;
+	params = {param} param_list+ | {none} void;
+	param_list = {sequence} param_list comma param | {single} param;
 	param = type_spec id;
-	compound_stmt = left_brace right_brace;
+	compound_stmt = left_brace var_decl* stmt* right_brace;
+	stmt = {expression_stmt} expression_stmt | {compound_stmt} compound_stmt;
+	expression_stmt = expression? semi;
+	expression = {assign_expression} var assign expression | {simple_expression} simple_expression;
+	var = id;
+    simple_expression = {relop_expression} [left]:additive_expression relop [right]:additive_expression | {additive_expression} additive_expression;
+    relop = {less_than_or_eq} less_than_or_eq | {less_than} less_than | {greater_than} greater_than | {greater_than_or_eq} greater_than_or_eq | {equals} equals | {not_equals} not_equals;
+    additive_expression = {additive_expression} additive_expression addop term | {term} term;
+    addop = {plus} plus | {minus} minus;
+    term = {term} term mulop factor | {factor} factor;
+    mulop = {multiplication} multiplication | {division} division;
+    factor = {factor} left_parenthesis expression right_parenthesis | {var} var | {num} num | {string} string_literal;
+    call = id left_parenthesis args right_parenthesis;
+    args = arg_list*;
+    arg_list = {sequence} arg_list comma expression | {single} expression;

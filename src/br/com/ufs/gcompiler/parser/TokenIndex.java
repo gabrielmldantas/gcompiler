@@ -112,7 +112,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTGreatherThanOrEq(@SuppressWarnings("unused") TGreatherThanOrEq node)
+    public void caseTGreaterThanOrEq(@SuppressWarnings("unused") TGreaterThanOrEq node)
     {
         this.index = 17;
     }

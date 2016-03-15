@@ -5,46 +5,46 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASingleParams extends PParams
+public final class AFactorTerm extends PTerm
 {
-    private PParam _param_;
+    private PFactor _factor_;
 
-    public ASingleParams()
+    public AFactorTerm()
     {
         // Constructor
     }
 
-    public ASingleParams(
-        @SuppressWarnings("hiding") PParam _param_)
+    public AFactorTerm(
+        @SuppressWarnings("hiding") PFactor _factor_)
     {
         // Constructor
-        setParam(_param_);
+        setFactor(_factor_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASingleParams(
-            cloneNode(this._param_));
+        return new AFactorTerm(
+            cloneNode(this._factor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASingleParams(this);
+        ((Analysis) sw).caseAFactorTerm(this);
     }
 
-    public PParam getParam()
+    public PFactor getFactor()
     {
-        return this._param_;
+        return this._factor_;
     }
 
-    public void setParam(PParam node)
+    public void setFactor(PFactor node)
     {
-        if(this._param_ != null)
+        if(this._factor_ != null)
         {
-            this._param_.parent(null);
+            this._factor_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ASingleParams extends PParams
             node.parent(this);
         }
 
-        this._param_ = node;
+        this._factor_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._param_);
+            + toString(this._factor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._param_ == child)
+        if(this._factor_ == child)
         {
-            this._param_ = null;
+            this._factor_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ASingleParams extends PParams
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._param_ == oldChild)
+        if(this._factor_ == oldChild)
         {
-            setParam((PParam) newChild);
+            setFactor((PFactor) newChild);
             return;
         }
 

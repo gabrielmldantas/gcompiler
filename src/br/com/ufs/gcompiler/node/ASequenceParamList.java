@@ -5,24 +5,24 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASequenceParams extends PParams
+public final class ASequenceParamList extends PParamList
 {
-    private PParams _params_;
+    private PParamList _paramList_;
     private TComma _comma_;
     private PParam _param_;
 
-    public ASequenceParams()
+    public ASequenceParamList()
     {
         // Constructor
     }
 
-    public ASequenceParams(
-        @SuppressWarnings("hiding") PParams _params_,
+    public ASequenceParamList(
+        @SuppressWarnings("hiding") PParamList _paramList_,
         @SuppressWarnings("hiding") TComma _comma_,
         @SuppressWarnings("hiding") PParam _param_)
     {
         // Constructor
-        setParams(_params_);
+        setParamList(_paramList_);
 
         setComma(_comma_);
 
@@ -33,8 +33,8 @@ public final class ASequenceParams extends PParams
     @Override
     public Object clone()
     {
-        return new ASequenceParams(
-            cloneNode(this._params_),
+        return new ASequenceParamList(
+            cloneNode(this._paramList_),
             cloneNode(this._comma_),
             cloneNode(this._param_));
     }
@@ -42,19 +42,19 @@ public final class ASequenceParams extends PParams
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASequenceParams(this);
+        ((Analysis) sw).caseASequenceParamList(this);
     }
 
-    public PParams getParams()
+    public PParamList getParamList()
     {
-        return this._params_;
+        return this._paramList_;
     }
 
-    public void setParams(PParams node)
+    public void setParamList(PParamList node)
     {
-        if(this._params_ != null)
+        if(this._paramList_ != null)
         {
-            this._params_.parent(null);
+            this._paramList_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class ASequenceParams extends PParams
             node.parent(this);
         }
 
-        this._params_ = node;
+        this._paramList_ = node;
     }
 
     public TComma getComma()
@@ -124,7 +124,7 @@ public final class ASequenceParams extends PParams
     public String toString()
     {
         return ""
-            + toString(this._params_)
+            + toString(this._paramList_)
             + toString(this._comma_)
             + toString(this._param_);
     }
@@ -133,9 +133,9 @@ public final class ASequenceParams extends PParams
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._params_ == child)
+        if(this._paramList_ == child)
         {
-            this._params_ = null;
+            this._paramList_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class ASequenceParams extends PParams
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._params_ == oldChild)
+        if(this._paramList_ == oldChild)
         {
-            setParams((PParams) newChild);
+            setParamList((PParamList) newChild);
             return;
         }
 

@@ -5,56 +5,56 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarDecl extends PVarDecl
+public final class ATermTerm extends PTerm
 {
-    private PTypeSpec _typeSpec_;
-    private TId _id_;
-    private TSemi _semi_;
+    private PTerm _term_;
+    private PMulop _mulop_;
+    private PFactor _factor_;
 
-    public AVarDecl()
+    public ATermTerm()
     {
         // Constructor
     }
 
-    public AVarDecl(
-        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
-        @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TSemi _semi_)
+    public ATermTerm(
+        @SuppressWarnings("hiding") PTerm _term_,
+        @SuppressWarnings("hiding") PMulop _mulop_,
+        @SuppressWarnings("hiding") PFactor _factor_)
     {
         // Constructor
-        setTypeSpec(_typeSpec_);
+        setTerm(_term_);
 
-        setId(_id_);
+        setMulop(_mulop_);
 
-        setSemi(_semi_);
+        setFactor(_factor_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AVarDecl(
-            cloneNode(this._typeSpec_),
-            cloneNode(this._id_),
-            cloneNode(this._semi_));
+        return new ATermTerm(
+            cloneNode(this._term_),
+            cloneNode(this._mulop_),
+            cloneNode(this._factor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarDecl(this);
+        ((Analysis) sw).caseATermTerm(this);
     }
 
-    public PTypeSpec getTypeSpec()
+    public PTerm getTerm()
     {
-        return this._typeSpec_;
+        return this._term_;
     }
 
-    public void setTypeSpec(PTypeSpec node)
+    public void setTerm(PTerm node)
     {
-        if(this._typeSpec_ != null)
+        if(this._term_ != null)
         {
-            this._typeSpec_.parent(null);
+            this._term_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +67,19 @@ public final class AVarDecl extends PVarDecl
             node.parent(this);
         }
 
-        this._typeSpec_ = node;
+        this._term_ = node;
     }
 
-    public TId getId()
+    public PMulop getMulop()
     {
-        return this._id_;
+        return this._mulop_;
     }
 
-    public void setId(TId node)
+    public void setMulop(PMulop node)
     {
-        if(this._id_ != null)
+        if(this._mulop_ != null)
         {
-            this._id_.parent(null);
+            this._mulop_.parent(null);
         }
 
         if(node != null)
@@ -92,19 +92,19 @@ public final class AVarDecl extends PVarDecl
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._mulop_ = node;
     }
 
-    public TSemi getSemi()
+    public PFactor getFactor()
     {
-        return this._semi_;
+        return this._factor_;
     }
 
-    public void setSemi(TSemi node)
+    public void setFactor(PFactor node)
     {
-        if(this._semi_ != null)
+        if(this._factor_ != null)
         {
-            this._semi_.parent(null);
+            this._factor_.parent(null);
         }
 
         if(node != null)
@@ -117,37 +117,37 @@ public final class AVarDecl extends PVarDecl
             node.parent(this);
         }
 
-        this._semi_ = node;
+        this._factor_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._typeSpec_)
-            + toString(this._id_)
-            + toString(this._semi_);
+            + toString(this._term_)
+            + toString(this._mulop_)
+            + toString(this._factor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpec_ == child)
+        if(this._term_ == child)
         {
-            this._typeSpec_ = null;
+            this._term_ = null;
             return;
         }
 
-        if(this._id_ == child)
+        if(this._mulop_ == child)
         {
-            this._id_ = null;
+            this._mulop_ = null;
             return;
         }
 
-        if(this._semi_ == child)
+        if(this._factor_ == child)
         {
-            this._semi_ = null;
+            this._factor_ = null;
             return;
         }
 
@@ -158,21 +158,21 @@ public final class AVarDecl extends PVarDecl
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpec_ == oldChild)
+        if(this._term_ == oldChild)
         {
-            setTypeSpec((PTypeSpec) newChild);
+            setTerm((PTerm) newChild);
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._mulop_ == oldChild)
         {
-            setId((TId) newChild);
+            setMulop((PMulop) newChild);
             return;
         }
 
-        if(this._semi_ == oldChild)
+        if(this._factor_ == oldChild)
         {
-            setSemi((TSemi) newChild);
+            setFactor((PFactor) newChild);
             return;
         }
 

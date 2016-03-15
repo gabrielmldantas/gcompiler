@@ -10,8 +10,11 @@ import br.com.ufs.gcompiler.extensions.lexer.GCompilerLexer;
 import br.com.ufs.gcompiler.lexer.LexerException;
 import br.com.ufs.gcompiler.node.EOF;
 import br.com.ufs.gcompiler.node.InvalidToken;
+import br.com.ufs.gcompiler.node.Start;
 import br.com.ufs.gcompiler.node.TBlank;
 import br.com.ufs.gcompiler.node.Token;
+import br.com.ufs.gcompiler.parser.Parser;
+import br.com.ufs.gcompiler.parser.ParserException;
 
 public class GCompiler {
 	private static final int PUSHBACK_BUFFER_LENGTH = 1024;
@@ -27,7 +30,10 @@ public class GCompiler {
 		FileWriter writer = new FileWriter(outputFileName);
 		try {
 			GCompilerLexer lexer = new GCompilerLexer(reader);
-			printTokens(lexer, writer);
+			Parser parser = new Parser(lexer);
+			Start start = parser.parse();
+			System.out.println(start);
+//			printTokens(lexer, writer);
 			System.out.println("\n\nSaída gravada no arquivo " + outputFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,7 +44,13 @@ public class GCompiler {
 			System.err.println(invalidToken.getText());
 		} catch (GCompilerException e) {
 			e.printStackTrace();
-		} finally {
+		} catch (ParserException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (LexerException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
 			reader.close();
 			writer.close();
 		}

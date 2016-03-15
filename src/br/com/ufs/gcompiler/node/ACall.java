@@ -5,84 +5,49 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AFuncDecl extends PFuncDecl
+public final class ACall extends PCall
 {
-    private PTypeSpec _typeSpec_;
     private TId _id_;
     private TLeftParenthesis _leftParenthesis_;
-    private PParams _params_;
+    private PArgs _args_;
     private TRightParenthesis _rightParenthesis_;
-    private PCompoundStmt _compoundStmt_;
 
-    public AFuncDecl()
+    public ACall()
     {
         // Constructor
     }
 
-    public AFuncDecl(
-        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
+    public ACall(
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftParenthesis _leftParenthesis_,
-        @SuppressWarnings("hiding") PParams _params_,
-        @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_,
-        @SuppressWarnings("hiding") PCompoundStmt _compoundStmt_)
+        @SuppressWarnings("hiding") PArgs _args_,
+        @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_)
     {
         // Constructor
-        setTypeSpec(_typeSpec_);
-
         setId(_id_);
 
         setLeftParenthesis(_leftParenthesis_);
 
-        setParams(_params_);
+        setArgs(_args_);
 
         setRightParenthesis(_rightParenthesis_);
-
-        setCompoundStmt(_compoundStmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AFuncDecl(
-            cloneNode(this._typeSpec_),
+        return new ACall(
             cloneNode(this._id_),
             cloneNode(this._leftParenthesis_),
-            cloneNode(this._params_),
-            cloneNode(this._rightParenthesis_),
-            cloneNode(this._compoundStmt_));
+            cloneNode(this._args_),
+            cloneNode(this._rightParenthesis_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAFuncDecl(this);
-    }
-
-    public PTypeSpec getTypeSpec()
-    {
-        return this._typeSpec_;
-    }
-
-    public void setTypeSpec(PTypeSpec node)
-    {
-        if(this._typeSpec_ != null)
-        {
-            this._typeSpec_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._typeSpec_ = node;
+        ((Analysis) sw).caseACall(this);
     }
 
     public TId getId()
@@ -135,16 +100,16 @@ public final class AFuncDecl extends PFuncDecl
         this._leftParenthesis_ = node;
     }
 
-    public PParams getParams()
+    public PArgs getArgs()
     {
-        return this._params_;
+        return this._args_;
     }
 
-    public void setParams(PParams node)
+    public void setArgs(PArgs node)
     {
-        if(this._params_ != null)
+        if(this._args_ != null)
         {
-            this._params_.parent(null);
+            this._args_.parent(null);
         }
 
         if(node != null)
@@ -157,7 +122,7 @@ public final class AFuncDecl extends PFuncDecl
             node.parent(this);
         }
 
-        this._params_ = node;
+        this._args_ = node;
     }
 
     public TRightParenthesis getRightParenthesis()
@@ -185,53 +150,20 @@ public final class AFuncDecl extends PFuncDecl
         this._rightParenthesis_ = node;
     }
 
-    public PCompoundStmt getCompoundStmt()
-    {
-        return this._compoundStmt_;
-    }
-
-    public void setCompoundStmt(PCompoundStmt node)
-    {
-        if(this._compoundStmt_ != null)
-        {
-            this._compoundStmt_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._compoundStmt_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._typeSpec_)
             + toString(this._id_)
             + toString(this._leftParenthesis_)
-            + toString(this._params_)
-            + toString(this._rightParenthesis_)
-            + toString(this._compoundStmt_);
+            + toString(this._args_)
+            + toString(this._rightParenthesis_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpec_ == child)
-        {
-            this._typeSpec_ = null;
-            return;
-        }
-
         if(this._id_ == child)
         {
             this._id_ = null;
@@ -244,21 +176,15 @@ public final class AFuncDecl extends PFuncDecl
             return;
         }
 
-        if(this._params_ == child)
+        if(this._args_ == child)
         {
-            this._params_ = null;
+            this._args_ = null;
             return;
         }
 
         if(this._rightParenthesis_ == child)
         {
             this._rightParenthesis_ = null;
-            return;
-        }
-
-        if(this._compoundStmt_ == child)
-        {
-            this._compoundStmt_ = null;
             return;
         }
 
@@ -269,12 +195,6 @@ public final class AFuncDecl extends PFuncDecl
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpec_ == oldChild)
-        {
-            setTypeSpec((PTypeSpec) newChild);
-            return;
-        }
-
         if(this._id_ == oldChild)
         {
             setId((TId) newChild);
@@ -287,21 +207,15 @@ public final class AFuncDecl extends PFuncDecl
             return;
         }
 
-        if(this._params_ == oldChild)
+        if(this._args_ == oldChild)
         {
-            setParams((PParams) newChild);
+            setArgs((PArgs) newChild);
             return;
         }
 
         if(this._rightParenthesis_ == oldChild)
         {
             setRightParenthesis((TRightParenthesis) newChild);
-            return;
-        }
-
-        if(this._compoundStmt_ == oldChild)
-        {
-            setCompoundStmt((PCompoundStmt) newChild);
             return;
         }
 

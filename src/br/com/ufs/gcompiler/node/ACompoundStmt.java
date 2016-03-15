@@ -2,12 +2,15 @@
 
 package br.com.ufs.gcompiler.node;
 
+import java.util.*;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ACompoundStmt extends PCompoundStmt
 {
     private TLeftBrace _leftBrace_;
+    private final LinkedList<PVarDecl> _varDecl_ = new LinkedList<PVarDecl>();
+    private final LinkedList<PStmt> _stmt_ = new LinkedList<PStmt>();
     private TRightBrace _rightBrace_;
 
     public ACompoundStmt()
@@ -17,10 +20,16 @@ public final class ACompoundStmt extends PCompoundStmt
 
     public ACompoundStmt(
         @SuppressWarnings("hiding") TLeftBrace _leftBrace_,
+        @SuppressWarnings("hiding") List<?> _varDecl_,
+        @SuppressWarnings("hiding") List<?> _stmt_,
         @SuppressWarnings("hiding") TRightBrace _rightBrace_)
     {
         // Constructor
         setLeftBrace(_leftBrace_);
+
+        setVarDecl(_varDecl_);
+
+        setStmt(_stmt_);
 
         setRightBrace(_rightBrace_);
 
@@ -31,6 +40,8 @@ public final class ACompoundStmt extends PCompoundStmt
     {
         return new ACompoundStmt(
             cloneNode(this._leftBrace_),
+            cloneList(this._varDecl_),
+            cloneList(this._stmt_),
             cloneNode(this._rightBrace_));
     }
 
@@ -65,6 +76,58 @@ public final class ACompoundStmt extends PCompoundStmt
         this._leftBrace_ = node;
     }
 
+    public LinkedList<PVarDecl> getVarDecl()
+    {
+        return this._varDecl_;
+    }
+
+    public void setVarDecl(List<?> list)
+    {
+        for(PVarDecl e : this._varDecl_)
+        {
+            e.parent(null);
+        }
+        this._varDecl_.clear();
+
+        for(Object obj_e : list)
+        {
+            PVarDecl e = (PVarDecl) obj_e;
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+            this._varDecl_.add(e);
+        }
+    }
+
+    public LinkedList<PStmt> getStmt()
+    {
+        return this._stmt_;
+    }
+
+    public void setStmt(List<?> list)
+    {
+        for(PStmt e : this._stmt_)
+        {
+            e.parent(null);
+        }
+        this._stmt_.clear();
+
+        for(Object obj_e : list)
+        {
+            PStmt e = (PStmt) obj_e;
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+            this._stmt_.add(e);
+        }
+    }
+
     public TRightBrace getRightBrace()
     {
         return this._rightBrace_;
@@ -95,6 +158,8 @@ public final class ACompoundStmt extends PCompoundStmt
     {
         return ""
             + toString(this._leftBrace_)
+            + toString(this._varDecl_)
+            + toString(this._stmt_)
             + toString(this._rightBrace_);
     }
 
@@ -105,6 +170,16 @@ public final class ACompoundStmt extends PCompoundStmt
         if(this._leftBrace_ == child)
         {
             this._leftBrace_ = null;
+            return;
+        }
+
+        if(this._varDecl_.remove(child))
+        {
+            return;
+        }
+
+        if(this._stmt_.remove(child))
+        {
             return;
         }
 
@@ -125,6 +200,42 @@ public final class ACompoundStmt extends PCompoundStmt
         {
             setLeftBrace((TLeftBrace) newChild);
             return;
+        }
+
+        for(ListIterator<PVarDecl> i = this._varDecl_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PVarDecl) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
+
+        for(ListIterator<PStmt> i = this._stmt_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PStmt) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._rightBrace_ == oldChild)

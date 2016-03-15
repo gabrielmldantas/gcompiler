@@ -5,51 +5,51 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASequenceDeclList extends PDeclList
+public final class AExpressionStmt extends PExpressionStmt
 {
-    private PDeclList _declList_;
-    private PDecl _decl_;
+    private PExpression _expression_;
+    private TSemi _semi_;
 
-    public ASequenceDeclList()
+    public AExpressionStmt()
     {
         // Constructor
     }
 
-    public ASequenceDeclList(
-        @SuppressWarnings("hiding") PDeclList _declList_,
-        @SuppressWarnings("hiding") PDecl _decl_)
+    public AExpressionStmt(
+        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") TSemi _semi_)
     {
         // Constructor
-        setDeclList(_declList_);
+        setExpression(_expression_);
 
-        setDecl(_decl_);
+        setSemi(_semi_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASequenceDeclList(
-            cloneNode(this._declList_),
-            cloneNode(this._decl_));
+        return new AExpressionStmt(
+            cloneNode(this._expression_),
+            cloneNode(this._semi_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASequenceDeclList(this);
+        ((Analysis) sw).caseAExpressionStmt(this);
     }
 
-    public PDeclList getDeclList()
+    public PExpression getExpression()
     {
-        return this._declList_;
+        return this._expression_;
     }
 
-    public void setDeclList(PDeclList node)
+    public void setExpression(PExpression node)
     {
-        if(this._declList_ != null)
+        if(this._expression_ != null)
         {
-            this._declList_.parent(null);
+            this._expression_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class ASequenceDeclList extends PDeclList
             node.parent(this);
         }
 
-        this._declList_ = node;
+        this._expression_ = node;
     }
 
-    public PDecl getDecl()
+    public TSemi getSemi()
     {
-        return this._decl_;
+        return this._semi_;
     }
 
-    public void setDecl(PDecl node)
+    public void setSemi(TSemi node)
     {
-        if(this._decl_ != null)
+        if(this._semi_ != null)
         {
-            this._decl_.parent(null);
+            this._semi_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class ASequenceDeclList extends PDeclList
             node.parent(this);
         }
 
-        this._decl_ = node;
+        this._semi_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._declList_)
-            + toString(this._decl_);
+            + toString(this._expression_)
+            + toString(this._semi_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._declList_ == child)
+        if(this._expression_ == child)
         {
-            this._declList_ = null;
+            this._expression_ = null;
             return;
         }
 
-        if(this._decl_ == child)
+        if(this._semi_ == child)
         {
-            this._decl_ = null;
+            this._semi_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class ASequenceDeclList extends PDeclList
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._declList_ == oldChild)
+        if(this._expression_ == oldChild)
         {
-            setDeclList((PDeclList) newChild);
+            setExpression((PExpression) newChild);
             return;
         }
 
-        if(this._decl_ == oldChild)
+        if(this._semi_ == oldChild)
         {
-            setDecl((PDecl) newChild);
+            setSemi((TSemi) newChild);
             return;
         }
 
