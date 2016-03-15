@@ -5,49 +5,49 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACall extends PCall
+public final class AArrayVar extends PVar
 {
     private TId _id_;
-    private TLeftParenthesis _leftParenthesis_;
-    private PArgList _argList_;
-    private TRightParenthesis _rightParenthesis_;
+    private TLeftBracket _leftBracket_;
+    private PExpression _expression_;
+    private TRightBracket _rightBracket_;
 
-    public ACall()
+    public AArrayVar()
     {
         // Constructor
     }
 
-    public ACall(
+    public AArrayVar(
         @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TLeftParenthesis _leftParenthesis_,
-        @SuppressWarnings("hiding") PArgList _argList_,
-        @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_)
+        @SuppressWarnings("hiding") TLeftBracket _leftBracket_,
+        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") TRightBracket _rightBracket_)
     {
         // Constructor
         setId(_id_);
 
-        setLeftParenthesis(_leftParenthesis_);
+        setLeftBracket(_leftBracket_);
 
-        setArgList(_argList_);
+        setExpression(_expression_);
 
-        setRightParenthesis(_rightParenthesis_);
+        setRightBracket(_rightBracket_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ACall(
+        return new AArrayVar(
             cloneNode(this._id_),
-            cloneNode(this._leftParenthesis_),
-            cloneNode(this._argList_),
-            cloneNode(this._rightParenthesis_));
+            cloneNode(this._leftBracket_),
+            cloneNode(this._expression_),
+            cloneNode(this._rightBracket_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACall(this);
+        ((Analysis) sw).caseAArrayVar(this);
     }
 
     public TId getId()
@@ -75,16 +75,16 @@ public final class ACall extends PCall
         this._id_ = node;
     }
 
-    public TLeftParenthesis getLeftParenthesis()
+    public TLeftBracket getLeftBracket()
     {
-        return this._leftParenthesis_;
+        return this._leftBracket_;
     }
 
-    public void setLeftParenthesis(TLeftParenthesis node)
+    public void setLeftBracket(TLeftBracket node)
     {
-        if(this._leftParenthesis_ != null)
+        if(this._leftBracket_ != null)
         {
-            this._leftParenthesis_.parent(null);
+            this._leftBracket_.parent(null);
         }
 
         if(node != null)
@@ -97,19 +97,19 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._leftParenthesis_ = node;
+        this._leftBracket_ = node;
     }
 
-    public PArgList getArgList()
+    public PExpression getExpression()
     {
-        return this._argList_;
+        return this._expression_;
     }
 
-    public void setArgList(PArgList node)
+    public void setExpression(PExpression node)
     {
-        if(this._argList_ != null)
+        if(this._expression_ != null)
         {
-            this._argList_.parent(null);
+            this._expression_.parent(null);
         }
 
         if(node != null)
@@ -122,19 +122,19 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._argList_ = node;
+        this._expression_ = node;
     }
 
-    public TRightParenthesis getRightParenthesis()
+    public TRightBracket getRightBracket()
     {
-        return this._rightParenthesis_;
+        return this._rightBracket_;
     }
 
-    public void setRightParenthesis(TRightParenthesis node)
+    public void setRightBracket(TRightBracket node)
     {
-        if(this._rightParenthesis_ != null)
+        if(this._rightBracket_ != null)
         {
-            this._rightParenthesis_.parent(null);
+            this._rightBracket_.parent(null);
         }
 
         if(node != null)
@@ -147,7 +147,7 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._rightParenthesis_ = node;
+        this._rightBracket_ = node;
     }
 
     @Override
@@ -155,9 +155,9 @@ public final class ACall extends PCall
     {
         return ""
             + toString(this._id_)
-            + toString(this._leftParenthesis_)
-            + toString(this._argList_)
-            + toString(this._rightParenthesis_);
+            + toString(this._leftBracket_)
+            + toString(this._expression_)
+            + toString(this._rightBracket_);
     }
 
     @Override
@@ -170,21 +170,21 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._leftParenthesis_ == child)
+        if(this._leftBracket_ == child)
         {
-            this._leftParenthesis_ = null;
+            this._leftBracket_ = null;
             return;
         }
 
-        if(this._argList_ == child)
+        if(this._expression_ == child)
         {
-            this._argList_ = null;
+            this._expression_ = null;
             return;
         }
 
-        if(this._rightParenthesis_ == child)
+        if(this._rightBracket_ == child)
         {
-            this._rightParenthesis_ = null;
+            this._rightBracket_ = null;
             return;
         }
 
@@ -201,21 +201,21 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._leftParenthesis_ == oldChild)
+        if(this._leftBracket_ == oldChild)
         {
-            setLeftParenthesis((TLeftParenthesis) newChild);
+            setLeftBracket((TLeftBracket) newChild);
             return;
         }
 
-        if(this._argList_ == oldChild)
+        if(this._expression_ == oldChild)
         {
-            setArgList((PArgList) newChild);
+            setExpression((PExpression) newChild);
             return;
         }
 
-        if(this._rightParenthesis_ == oldChild)
+        if(this._rightBracket_ == oldChild)
         {
-            setRightParenthesis((TRightParenthesis) newChild);
+            setRightBracket((TRightBracket) newChild);
             return;
         }
 

@@ -2,15 +2,14 @@
 
 package br.com.ufs.gcompiler.node;
 
-import java.util.*;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ACompoundStmt extends PCompoundStmt
 {
     private TLeftBrace _leftBrace_;
-    private final LinkedList<PVarDecl> _varDecl_ = new LinkedList<PVarDecl>();
-    private final LinkedList<PStmt> _stmt_ = new LinkedList<PStmt>();
+    private PLocalDecl _localDecl_;
+    private PStmtList _stmtList_;
     private TRightBrace _rightBrace_;
 
     public ACompoundStmt()
@@ -20,16 +19,16 @@ public final class ACompoundStmt extends PCompoundStmt
 
     public ACompoundStmt(
         @SuppressWarnings("hiding") TLeftBrace _leftBrace_,
-        @SuppressWarnings("hiding") List<?> _varDecl_,
-        @SuppressWarnings("hiding") List<?> _stmt_,
+        @SuppressWarnings("hiding") PLocalDecl _localDecl_,
+        @SuppressWarnings("hiding") PStmtList _stmtList_,
         @SuppressWarnings("hiding") TRightBrace _rightBrace_)
     {
         // Constructor
         setLeftBrace(_leftBrace_);
 
-        setVarDecl(_varDecl_);
+        setLocalDecl(_localDecl_);
 
-        setStmt(_stmt_);
+        setStmtList(_stmtList_);
 
         setRightBrace(_rightBrace_);
 
@@ -40,8 +39,8 @@ public final class ACompoundStmt extends PCompoundStmt
     {
         return new ACompoundStmt(
             cloneNode(this._leftBrace_),
-            cloneList(this._varDecl_),
-            cloneList(this._stmt_),
+            cloneNode(this._localDecl_),
+            cloneNode(this._stmtList_),
             cloneNode(this._rightBrace_));
     }
 
@@ -76,56 +75,54 @@ public final class ACompoundStmt extends PCompoundStmt
         this._leftBrace_ = node;
     }
 
-    public LinkedList<PVarDecl> getVarDecl()
+    public PLocalDecl getLocalDecl()
     {
-        return this._varDecl_;
+        return this._localDecl_;
     }
 
-    public void setVarDecl(List<?> list)
+    public void setLocalDecl(PLocalDecl node)
     {
-        for(PVarDecl e : this._varDecl_)
+        if(this._localDecl_ != null)
         {
-            e.parent(null);
+            this._localDecl_.parent(null);
         }
-        this._varDecl_.clear();
 
-        for(Object obj_e : list)
+        if(node != null)
         {
-            PVarDecl e = (PVarDecl) obj_e;
-            if(e.parent() != null)
+            if(node.parent() != null)
             {
-                e.parent().removeChild(e);
+                node.parent().removeChild(node);
             }
 
-            e.parent(this);
-            this._varDecl_.add(e);
+            node.parent(this);
         }
+
+        this._localDecl_ = node;
     }
 
-    public LinkedList<PStmt> getStmt()
+    public PStmtList getStmtList()
     {
-        return this._stmt_;
+        return this._stmtList_;
     }
 
-    public void setStmt(List<?> list)
+    public void setStmtList(PStmtList node)
     {
-        for(PStmt e : this._stmt_)
+        if(this._stmtList_ != null)
         {
-            e.parent(null);
+            this._stmtList_.parent(null);
         }
-        this._stmt_.clear();
 
-        for(Object obj_e : list)
+        if(node != null)
         {
-            PStmt e = (PStmt) obj_e;
-            if(e.parent() != null)
+            if(node.parent() != null)
             {
-                e.parent().removeChild(e);
+                node.parent().removeChild(node);
             }
 
-            e.parent(this);
-            this._stmt_.add(e);
+            node.parent(this);
         }
+
+        this._stmtList_ = node;
     }
 
     public TRightBrace getRightBrace()
@@ -158,8 +155,8 @@ public final class ACompoundStmt extends PCompoundStmt
     {
         return ""
             + toString(this._leftBrace_)
-            + toString(this._varDecl_)
-            + toString(this._stmt_)
+            + toString(this._localDecl_)
+            + toString(this._stmtList_)
             + toString(this._rightBrace_);
     }
 
@@ -173,13 +170,15 @@ public final class ACompoundStmt extends PCompoundStmt
             return;
         }
 
-        if(this._varDecl_.remove(child))
+        if(this._localDecl_ == child)
         {
+            this._localDecl_ = null;
             return;
         }
 
-        if(this._stmt_.remove(child))
+        if(this._stmtList_ == child)
         {
+            this._stmtList_ = null;
             return;
         }
 
@@ -202,40 +201,16 @@ public final class ACompoundStmt extends PCompoundStmt
             return;
         }
 
-        for(ListIterator<PVarDecl> i = this._varDecl_.listIterator(); i.hasNext();)
+        if(this._localDecl_ == oldChild)
         {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PVarDecl) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
+            setLocalDecl((PLocalDecl) newChild);
+            return;
         }
 
-        for(ListIterator<PStmt> i = this._stmt_.listIterator(); i.hasNext();)
+        if(this._stmtList_ == oldChild)
         {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PStmt) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
+            setStmtList((PStmtList) newChild);
+            return;
         }
 
         if(this._rightBrace_ == oldChild)

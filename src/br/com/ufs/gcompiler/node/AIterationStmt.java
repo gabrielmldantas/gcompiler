@@ -5,61 +5,66 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACall extends PCall
+public final class AIterationStmt extends PIterationStmt
 {
-    private TId _id_;
+    private TWhile _while_;
     private TLeftParenthesis _leftParenthesis_;
-    private PArgList _argList_;
+    private PExpression _expression_;
     private TRightParenthesis _rightParenthesis_;
+    private PStmt _stmt_;
 
-    public ACall()
+    public AIterationStmt()
     {
         // Constructor
     }
 
-    public ACall(
-        @SuppressWarnings("hiding") TId _id_,
+    public AIterationStmt(
+        @SuppressWarnings("hiding") TWhile _while_,
         @SuppressWarnings("hiding") TLeftParenthesis _leftParenthesis_,
-        @SuppressWarnings("hiding") PArgList _argList_,
-        @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_)
+        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_,
+        @SuppressWarnings("hiding") PStmt _stmt_)
     {
         // Constructor
-        setId(_id_);
+        setWhile(_while_);
 
         setLeftParenthesis(_leftParenthesis_);
 
-        setArgList(_argList_);
+        setExpression(_expression_);
 
         setRightParenthesis(_rightParenthesis_);
+
+        setStmt(_stmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ACall(
-            cloneNode(this._id_),
+        return new AIterationStmt(
+            cloneNode(this._while_),
             cloneNode(this._leftParenthesis_),
-            cloneNode(this._argList_),
-            cloneNode(this._rightParenthesis_));
+            cloneNode(this._expression_),
+            cloneNode(this._rightParenthesis_),
+            cloneNode(this._stmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACall(this);
+        ((Analysis) sw).caseAIterationStmt(this);
     }
 
-    public TId getId()
+    public TWhile getWhile()
     {
-        return this._id_;
+        return this._while_;
     }
 
-    public void setId(TId node)
+    public void setWhile(TWhile node)
     {
-        if(this._id_ != null)
+        if(this._while_ != null)
         {
-            this._id_.parent(null);
+            this._while_.parent(null);
         }
 
         if(node != null)
@@ -72,7 +77,7 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._while_ = node;
     }
 
     public TLeftParenthesis getLeftParenthesis()
@@ -100,16 +105,16 @@ public final class ACall extends PCall
         this._leftParenthesis_ = node;
     }
 
-    public PArgList getArgList()
+    public PExpression getExpression()
     {
-        return this._argList_;
+        return this._expression_;
     }
 
-    public void setArgList(PArgList node)
+    public void setExpression(PExpression node)
     {
-        if(this._argList_ != null)
+        if(this._expression_ != null)
         {
-            this._argList_.parent(null);
+            this._expression_.parent(null);
         }
 
         if(node != null)
@@ -122,7 +127,7 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._argList_ = node;
+        this._expression_ = node;
     }
 
     public TRightParenthesis getRightParenthesis()
@@ -150,23 +155,49 @@ public final class ACall extends PCall
         this._rightParenthesis_ = node;
     }
 
+    public PStmt getStmt()
+    {
+        return this._stmt_;
+    }
+
+    public void setStmt(PStmt node)
+    {
+        if(this._stmt_ != null)
+        {
+            this._stmt_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._stmt_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._id_)
+            + toString(this._while_)
             + toString(this._leftParenthesis_)
-            + toString(this._argList_)
-            + toString(this._rightParenthesis_);
+            + toString(this._expression_)
+            + toString(this._rightParenthesis_)
+            + toString(this._stmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._id_ == child)
+        if(this._while_ == child)
         {
-            this._id_ = null;
+            this._while_ = null;
             return;
         }
 
@@ -176,15 +207,21 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._argList_ == child)
+        if(this._expression_ == child)
         {
-            this._argList_ = null;
+            this._expression_ = null;
             return;
         }
 
         if(this._rightParenthesis_ == child)
         {
             this._rightParenthesis_ = null;
+            return;
+        }
+
+        if(this._stmt_ == child)
+        {
+            this._stmt_ = null;
             return;
         }
 
@@ -195,9 +232,9 @@ public final class ACall extends PCall
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._id_ == oldChild)
+        if(this._while_ == oldChild)
         {
-            setId((TId) newChild);
+            setWhile((TWhile) newChild);
             return;
         }
 
@@ -207,15 +244,21 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._argList_ == oldChild)
+        if(this._expression_ == oldChild)
         {
-            setArgList((PArgList) newChild);
+            setExpression((PExpression) newChild);
             return;
         }
 
         if(this._rightParenthesis_ == oldChild)
         {
             setRightParenthesis((TRightParenthesis) newChild);
+            return;
+        }
+
+        if(this._stmt_ == oldChild)
+        {
+            setStmt((PStmt) newChild);
             return;
         }
 

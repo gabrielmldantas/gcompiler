@@ -74,30 +74,41 @@ Tokens
     
 Ignored Tokens
 	blank,
+	blk_comment,
 	line_comment;
     
 Productions
 	program = decl_list;
 	decl_list = decl+;
 	decl = {var_decl} var_decl | {func_decl} func_decl;
-	var_decl = type_spec id semi;
+	var_decl = {simple} type_spec id semi | {array} type_spec id left_bracket num right_bracket;
 	func_decl = type_spec id left_parenthesis params right_parenthesis compound_stmt;
+	local_decl = local_decl var_decl | {empty};
 	type_spec = {int} int | {void} void | {string} string;
 	params = {param} param_list+ | {none} void;
 	param_list = {sequence} param_list comma param | {single} param;
-	param = type_spec id;
-	compound_stmt = left_brace var_decl* stmt* right_brace;
-	stmt = {expression_stmt} expression_stmt | {compound_stmt} compound_stmt;
-	expression_stmt = expression? semi;
+	param = {simple} type_spec id | {array} type_spec id left_bracket right_bracket;
+	
+	compound_stmt = left_brace local_decl stmt_list right_brace;
+	stmt_list = stmt_list stmt | {empty};
+	stmt = {matched_stmt} matched_stmt | {unmatched_stmt} unmatched_stmt;
+    matched_stmt = {matched_if} if left_parenthesis expression right_parenthesis [if_stmt]:matched_stmt else [else_stmt]:matched_stmt | {other_stmt} other_stmt;
+	unmatched_stmt = {unmatched_if} if left_parenthesis expression right_parenthesis stmt | {unmatched_if_else} if left_parenthesis expression right_parenthesis matched_stmt else unmatched_stmt;
+	other_stmt = {expression_stmt} expression_stmt | {compound_stmt} compound_stmt | {iteration_stmt} iteration_stmt | {return_stmt} return_stmt;
+	expression_stmt = expression semi | {empty} semi;
+	iteration_stmt = while left_parenthesis expression right_parenthesis stmt;
+    return_stmt = {void} return semi | {expression} return expression semi;
+    
+    var = {simple} id | {array} id left_bracket expression right_bracket;
 	expression = {assign_expression} var assign expression | {simple_expression} simple_expression;
-	var = id;
     simple_expression = {relop_expression} [left]:additive_expression relop [right]:additive_expression | {additive_expression} additive_expression;
     relop = {less_than_or_eq} less_than_or_eq | {less_than} less_than | {greater_than} greater_than | {greater_than_or_eq} greater_than_or_eq | {equals} equals | {not_equals} not_equals;
     additive_expression = {additive_expression} additive_expression addop term | {term} term;
     addop = {plus} plus | {minus} minus;
     term = {term} term mulop factor | {factor} factor;
     mulop = {multiplication} multiplication | {division} division;
-    factor = {factor} left_parenthesis expression right_parenthesis | {var} var | {num} num | {string} string_literal;
-    call = id left_parenthesis args right_parenthesis;
-    args = arg_list*;
-    arg_list = {sequence} arg_list comma expression | {single} expression;
+    factor = {factor} left_parenthesis expression right_parenthesis | {var} var | {num} num | {string} string_literal | {call} call;
+    
+    call = id left_parenthesis arg_list right_parenthesis;
+    arg_list = {sequence} arg_list comma expression | {single} expression | {empty};
+    

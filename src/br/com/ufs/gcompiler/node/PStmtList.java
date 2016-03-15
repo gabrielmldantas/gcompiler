@@ -2,7 +2,7 @@
 
 package br.com.ufs.gcompiler.node;
 
-public abstract class PArgs extends Node
+public abstract class PStmtList extends Node
 {
     // Empty body
 }

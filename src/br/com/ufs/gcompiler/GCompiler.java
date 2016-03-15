@@ -45,8 +45,7 @@ public class GCompiler {
 		} catch (GCompilerException e) {
 			e.printStackTrace();
 		} catch (ParserException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (LexerException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

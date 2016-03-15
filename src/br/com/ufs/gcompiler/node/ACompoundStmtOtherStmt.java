@@ -5,16 +5,16 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACompoundStmtStmt extends PStmt
+public final class ACompoundStmtOtherStmt extends POtherStmt
 {
     private PCompoundStmt _compoundStmt_;
 
-    public ACompoundStmtStmt()
+    public ACompoundStmtOtherStmt()
     {
         // Constructor
     }
 
-    public ACompoundStmtStmt(
+    public ACompoundStmtOtherStmt(
         @SuppressWarnings("hiding") PCompoundStmt _compoundStmt_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ACompoundStmtStmt extends PStmt
     @Override
     public Object clone()
     {
-        return new ACompoundStmtStmt(
+        return new ACompoundStmtOtherStmt(
             cloneNode(this._compoundStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACompoundStmtStmt(this);
+        ((Analysis) sw).caseACompoundStmtOtherStmt(this);
     }
 
     public PCompoundStmt getCompoundStmt()

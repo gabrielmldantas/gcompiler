@@ -5,16 +5,16 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExpressionStmtStmt extends PStmt
+public final class AExpressionStmtOtherStmt extends POtherStmt
 {
     private PExpressionStmt _expressionStmt_;
 
-    public AExpressionStmtStmt()
+    public AExpressionStmtOtherStmt()
     {
         // Constructor
     }
 
-    public AExpressionStmtStmt(
+    public AExpressionStmtOtherStmt(
         @SuppressWarnings("hiding") PExpressionStmt _expressionStmt_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AExpressionStmtStmt extends PStmt
     @Override
     public Object clone()
     {
-        return new AExpressionStmtStmt(
+        return new AExpressionStmtOtherStmt(
             cloneNode(this._expressionStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAExpressionStmtStmt(this);
+        ((Analysis) sw).caseAExpressionStmtOtherStmt(this);
     }
 
     public PExpressionStmt getExpressionStmt()

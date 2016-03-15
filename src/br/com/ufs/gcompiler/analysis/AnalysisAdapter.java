@@ -99,13 +99,31 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVarDecl(AVarDecl node)
+    public void caseASimpleVarDecl(ASimpleVarDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArrayVarDecl(AArrayVarDecl node)
     {
         defaultCase(node);
     }
 
     @Override
     public void caseAFuncDecl(AFuncDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALocalDecl(ALocalDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyLocalDecl(AEmptyLocalDecl node)
     {
         defaultCase(node);
     }
@@ -153,7 +171,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAParam(AParam node)
+    public void caseASimpleParam(ASimpleParam node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArrayParam(AArrayParam node)
     {
         defaultCase(node);
     }
@@ -165,19 +189,115 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAExpressionStmtStmt(AExpressionStmtStmt node)
+    public void caseAStmtList(AStmtList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseACompoundStmtStmt(ACompoundStmtStmt node)
+    public void caseAEmptyStmtList(AEmptyStmtList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatchedStmtStmt(AMatchedStmtStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnmatchedStmtStmt(AUnmatchedStmtStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatchedIfMatchedStmt(AMatchedIfMatchedStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOtherStmtMatchedStmt(AOtherStmtMatchedStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnmatchedIfUnmatchedStmt(AUnmatchedIfUnmatchedStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnmatchedIfElseUnmatchedStmt(AUnmatchedIfElseUnmatchedStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpressionStmtOtherStmt(AExpressionStmtOtherStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACompoundStmtOtherStmt(ACompoundStmtOtherStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIterationStmtOtherStmt(AIterationStmtOtherStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturnStmtOtherStmt(AReturnStmtOtherStmt node)
     {
         defaultCase(node);
     }
 
     @Override
     public void caseAExpressionStmt(AExpressionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyExpressionStmt(AEmptyExpressionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIterationStmt(AIterationStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVoidReturnStmt(AVoidReturnStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpressionReturnStmt(AExpressionReturnStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASimpleVar(ASimpleVar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArrayVar(AArrayVar node)
     {
         defaultCase(node);
     }
@@ -190,12 +310,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseASimpleExpressionExpression(ASimpleExpressionExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAVar(AVar node)
     {
         defaultCase(node);
     }
@@ -303,6 +417,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAVarFactor(AVarFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseANumFactor(ANumFactor node)
     {
         defaultCase(node);
@@ -315,13 +435,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseACall(ACall node)
+    public void caseACallFactor(ACallFactor node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAArgs(AArgs node)
+    public void caseACall(ACall node)
     {
         defaultCase(node);
     }
@@ -334,6 +454,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseASingleArgList(ASingleArgList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyArgList(AEmptyArgList node)
     {
         defaultCase(node);
     }

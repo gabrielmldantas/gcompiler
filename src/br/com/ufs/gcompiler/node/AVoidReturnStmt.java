@@ -5,26 +5,22 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarDecl extends PVarDecl
+public final class AVoidReturnStmt extends PReturnStmt
 {
-    private PTypeSpec _typeSpec_;
-    private TId _id_;
+    private TReturn _return_;
     private TSemi _semi_;
 
-    public AVarDecl()
+    public AVoidReturnStmt()
     {
         // Constructor
     }
 
-    public AVarDecl(
-        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
-        @SuppressWarnings("hiding") TId _id_,
+    public AVoidReturnStmt(
+        @SuppressWarnings("hiding") TReturn _return_,
         @SuppressWarnings("hiding") TSemi _semi_)
     {
         // Constructor
-        setTypeSpec(_typeSpec_);
-
-        setId(_id_);
+        setReturn(_return_);
 
         setSemi(_semi_);
 
@@ -33,28 +29,27 @@ public final class AVarDecl extends PVarDecl
     @Override
     public Object clone()
     {
-        return new AVarDecl(
-            cloneNode(this._typeSpec_),
-            cloneNode(this._id_),
+        return new AVoidReturnStmt(
+            cloneNode(this._return_),
             cloneNode(this._semi_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarDecl(this);
+        ((Analysis) sw).caseAVoidReturnStmt(this);
     }
 
-    public PTypeSpec getTypeSpec()
+    public TReturn getReturn()
     {
-        return this._typeSpec_;
+        return this._return_;
     }
 
-    public void setTypeSpec(PTypeSpec node)
+    public void setReturn(TReturn node)
     {
-        if(this._typeSpec_ != null)
+        if(this._return_ != null)
         {
-            this._typeSpec_.parent(null);
+            this._return_.parent(null);
         }
 
         if(node != null)
@@ -67,32 +62,7 @@ public final class AVarDecl extends PVarDecl
             node.parent(this);
         }
 
-        this._typeSpec_ = node;
-    }
-
-    public TId getId()
-    {
-        return this._id_;
-    }
-
-    public void setId(TId node)
-    {
-        if(this._id_ != null)
-        {
-            this._id_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._id_ = node;
+        this._return_ = node;
     }
 
     public TSemi getSemi()
@@ -124,8 +94,7 @@ public final class AVarDecl extends PVarDecl
     public String toString()
     {
         return ""
-            + toString(this._typeSpec_)
-            + toString(this._id_)
+            + toString(this._return_)
             + toString(this._semi_);
     }
 
@@ -133,15 +102,9 @@ public final class AVarDecl extends PVarDecl
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpec_ == child)
+        if(this._return_ == child)
         {
-            this._typeSpec_ = null;
-            return;
-        }
-
-        if(this._id_ == child)
-        {
-            this._id_ = null;
+            this._return_ = null;
             return;
         }
 
@@ -158,15 +121,9 @@ public final class AVarDecl extends PVarDecl
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpec_ == oldChild)
+        if(this._return_ == oldChild)
         {
-            setTypeSpec((PTypeSpec) newChild);
-            return;
-        }
-
-        if(this._id_ == oldChild)
-        {
-            setId((TId) newChild);
+            setReturn((TReturn) newChild);
             return;
         }
 

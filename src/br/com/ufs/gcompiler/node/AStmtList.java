@@ -5,51 +5,51 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AParam extends PParam
+public final class AStmtList extends PStmtList
 {
-    private PTypeSpec _typeSpec_;
-    private TId _id_;
+    private PStmtList _stmtList_;
+    private PStmt _stmt_;
 
-    public AParam()
+    public AStmtList()
     {
         // Constructor
     }
 
-    public AParam(
-        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
-        @SuppressWarnings("hiding") TId _id_)
+    public AStmtList(
+        @SuppressWarnings("hiding") PStmtList _stmtList_,
+        @SuppressWarnings("hiding") PStmt _stmt_)
     {
         // Constructor
-        setTypeSpec(_typeSpec_);
+        setStmtList(_stmtList_);
 
-        setId(_id_);
+        setStmt(_stmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AParam(
-            cloneNode(this._typeSpec_),
-            cloneNode(this._id_));
+        return new AStmtList(
+            cloneNode(this._stmtList_),
+            cloneNode(this._stmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAParam(this);
+        ((Analysis) sw).caseAStmtList(this);
     }
 
-    public PTypeSpec getTypeSpec()
+    public PStmtList getStmtList()
     {
-        return this._typeSpec_;
+        return this._stmtList_;
     }
 
-    public void setTypeSpec(PTypeSpec node)
+    public void setStmtList(PStmtList node)
     {
-        if(this._typeSpec_ != null)
+        if(this._stmtList_ != null)
         {
-            this._typeSpec_.parent(null);
+            this._stmtList_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AParam extends PParam
             node.parent(this);
         }
 
-        this._typeSpec_ = node;
+        this._stmtList_ = node;
     }
 
-    public TId getId()
+    public PStmt getStmt()
     {
-        return this._id_;
+        return this._stmt_;
     }
 
-    public void setId(TId node)
+    public void setStmt(PStmt node)
     {
-        if(this._id_ != null)
+        if(this._stmt_ != null)
         {
-            this._id_.parent(null);
+            this._stmt_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AParam extends PParam
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._stmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._typeSpec_)
-            + toString(this._id_);
+            + toString(this._stmtList_)
+            + toString(this._stmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpec_ == child)
+        if(this._stmtList_ == child)
         {
-            this._typeSpec_ = null;
+            this._stmtList_ = null;
             return;
         }
 
-        if(this._id_ == child)
+        if(this._stmt_ == child)
         {
-            this._id_ = null;
+            this._stmt_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AParam extends PParam
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpec_ == oldChild)
+        if(this._stmtList_ == oldChild)
         {
-            setTypeSpec((PTypeSpec) newChild);
+            setStmtList((PStmtList) newChild);
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._stmt_ == oldChild)
         {
-            setId((TId) newChild);
+            setStmt((PStmt) newChild);
             return;
         }
 

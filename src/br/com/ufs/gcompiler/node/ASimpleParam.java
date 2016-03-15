@@ -5,19 +5,23 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVar extends PVar
+public final class ASimpleParam extends PParam
 {
+    private PTypeSpec _typeSpec_;
     private TId _id_;
 
-    public AVar()
+    public ASimpleParam()
     {
         // Constructor
     }
 
-    public AVar(
+    public ASimpleParam(
+        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
         @SuppressWarnings("hiding") TId _id_)
     {
         // Constructor
+        setTypeSpec(_typeSpec_);
+
         setId(_id_);
 
     }
@@ -25,14 +29,40 @@ public final class AVar extends PVar
     @Override
     public Object clone()
     {
-        return new AVar(
+        return new ASimpleParam(
+            cloneNode(this._typeSpec_),
             cloneNode(this._id_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVar(this);
+        ((Analysis) sw).caseASimpleParam(this);
+    }
+
+    public PTypeSpec getTypeSpec()
+    {
+        return this._typeSpec_;
+    }
+
+    public void setTypeSpec(PTypeSpec node)
+    {
+        if(this._typeSpec_ != null)
+        {
+            this._typeSpec_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._typeSpec_ = node;
     }
 
     public TId getId()
@@ -64,6 +94,7 @@ public final class AVar extends PVar
     public String toString()
     {
         return ""
+            + toString(this._typeSpec_)
             + toString(this._id_);
     }
 
@@ -71,6 +102,12 @@ public final class AVar extends PVar
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._typeSpec_ == child)
+        {
+            this._typeSpec_ = null;
+            return;
+        }
+
         if(this._id_ == child)
         {
             this._id_ = null;
@@ -84,6 +121,12 @@ public final class AVar extends PVar
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._typeSpec_ == oldChild)
+        {
+            setTypeSpec((PTypeSpec) newChild);
+            return;
+        }
+
         if(this._id_ == oldChild)
         {
             setId((TId) newChild);
