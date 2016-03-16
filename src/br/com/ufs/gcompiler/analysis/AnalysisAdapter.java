@@ -135,13 +135,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVoidTypeSpec(AVoidTypeSpec node)
+    public void caseAStringTypeSpec(AStringTypeSpec node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAStringTypeSpec(AStringTypeSpec node)
+    public void caseAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
     {
         defaultCase(node);
     }

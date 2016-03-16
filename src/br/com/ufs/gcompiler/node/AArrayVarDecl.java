@@ -12,6 +12,7 @@ public final class AArrayVarDecl extends PVarDecl
     private TLeftBracket _leftBracket_;
     private TNum _num_;
     private TRightBracket _rightBracket_;
+    private TSemi _semi_;
 
     public AArrayVarDecl()
     {
@@ -23,7 +24,8 @@ public final class AArrayVarDecl extends PVarDecl
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftBracket _leftBracket_,
         @SuppressWarnings("hiding") TNum _num_,
-        @SuppressWarnings("hiding") TRightBracket _rightBracket_)
+        @SuppressWarnings("hiding") TRightBracket _rightBracket_,
+        @SuppressWarnings("hiding") TSemi _semi_)
     {
         // Constructor
         setTypeSpec(_typeSpec_);
@@ -36,6 +38,8 @@ public final class AArrayVarDecl extends PVarDecl
 
         setRightBracket(_rightBracket_);
 
+        setSemi(_semi_);
+
     }
 
     @Override
@@ -46,7 +50,8 @@ public final class AArrayVarDecl extends PVarDecl
             cloneNode(this._id_),
             cloneNode(this._leftBracket_),
             cloneNode(this._num_),
-            cloneNode(this._rightBracket_));
+            cloneNode(this._rightBracket_),
+            cloneNode(this._semi_));
     }
 
     @Override
@@ -180,6 +185,31 @@ public final class AArrayVarDecl extends PVarDecl
         this._rightBracket_ = node;
     }
 
+    public TSemi getSemi()
+    {
+        return this._semi_;
+    }
+
+    public void setSemi(TSemi node)
+    {
+        if(this._semi_ != null)
+        {
+            this._semi_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._semi_ = node;
+    }
+
     @Override
     public String toString()
     {
@@ -188,7 +218,8 @@ public final class AArrayVarDecl extends PVarDecl
             + toString(this._id_)
             + toString(this._leftBracket_)
             + toString(this._num_)
-            + toString(this._rightBracket_);
+            + toString(this._rightBracket_)
+            + toString(this._semi_);
     }
 
     @Override
@@ -222,6 +253,12 @@ public final class AArrayVarDecl extends PVarDecl
         if(this._rightBracket_ == child)
         {
             this._rightBracket_ = null;
+            return;
+        }
+
+        if(this._semi_ == child)
+        {
+            this._semi_ = null;
             return;
         }
 
@@ -259,6 +296,12 @@ public final class AArrayVarDecl extends PVarDecl
         if(this._rightBracket_ == oldChild)
         {
             setRightBracket((TRightBracket) newChild);
+            return;
+        }
+
+        if(this._semi_ == oldChild)
+        {
+            setSemi((TSemi) newChild);
             return;
         }
 

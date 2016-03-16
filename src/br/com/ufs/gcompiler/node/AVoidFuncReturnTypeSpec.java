@@ -5,16 +5,16 @@ package br.com.ufs.gcompiler.node;
 import br.com.ufs.gcompiler.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVoidTypeSpec extends PTypeSpec
+public final class AVoidFuncReturnTypeSpec extends PFuncReturnTypeSpec
 {
     private TVoid _void_;
 
-    public AVoidTypeSpec()
+    public AVoidFuncReturnTypeSpec()
     {
         // Constructor
     }
 
-    public AVoidTypeSpec(
+    public AVoidFuncReturnTypeSpec(
         @SuppressWarnings("hiding") TVoid _void_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AVoidTypeSpec extends PTypeSpec
     @Override
     public Object clone()
     {
-        return new AVoidTypeSpec(
+        return new AVoidFuncReturnTypeSpec(
             cloneNode(this._void_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVoidTypeSpec(this);
+        ((Analysis) sw).caseAVoidFuncReturnTypeSpec(this);
     }
 
     public TVoid getVoid()

@@ -167,6 +167,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAArrayVarDecl(AArrayVarDecl node)
     {
         inAArrayVarDecl(node);
+        if(node.getSemi() != null)
+        {
+            node.getSemi().apply(this);
+        }
         if(node.getRightBracket() != null)
         {
             node.getRightBracket().apply(this);
@@ -224,9 +228,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        if(node.getTypeSpec() != null)
+        if(node.getFuncReturnTypeSpec() != null)
         {
-            node.getTypeSpec().apply(this);
+            node.getFuncReturnTypeSpec().apply(this);
         }
         outAFuncDecl(node);
     }
@@ -294,27 +298,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAIntTypeSpec(node);
     }
 
-    public void inAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        inAVoidTypeSpec(node);
-        if(node.getVoid() != null)
-        {
-            node.getVoid().apply(this);
-        }
-        outAVoidTypeSpec(node);
-    }
-
     public void inAStringTypeSpec(AStringTypeSpec node)
     {
         defaultIn(node);
@@ -334,6 +317,48 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getString().apply(this);
         }
         outAStringTypeSpec(node);
+    }
+
+    public void inAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        inAFuncReturnTypeSpec(node);
+        if(node.getTypeSpec() != null)
+        {
+            node.getTypeSpec().apply(this);
+        }
+        outAFuncReturnTypeSpec(node);
+    }
+
+    public void inAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        inAVoidFuncReturnTypeSpec(node);
+        if(node.getVoid() != null)
+        {
+            node.getVoid().apply(this);
+        }
+        outAVoidFuncReturnTypeSpec(node);
     }
 
     public void inAParamParams(AParamParams node)
@@ -899,9 +924,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAIterationStmt(AIterationStmt node)
     {
         inAIterationStmt(node);
-        if(node.getStmt() != null)
+        if(node.getOtherStmt() != null)
         {
-            node.getStmt().apply(this);
+            node.getOtherStmt().apply(this);
         }
         if(node.getRightParenthesis() != null)
         {

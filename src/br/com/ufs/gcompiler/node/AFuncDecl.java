@@ -7,7 +7,7 @@ import br.com.ufs.gcompiler.analysis.*;
 @SuppressWarnings("nls")
 public final class AFuncDecl extends PFuncDecl
 {
-    private PTypeSpec _typeSpec_;
+    private PFuncReturnTypeSpec _funcReturnTypeSpec_;
     private TId _id_;
     private TLeftParenthesis _leftParenthesis_;
     private PParams _params_;
@@ -20,7 +20,7 @@ public final class AFuncDecl extends PFuncDecl
     }
 
     public AFuncDecl(
-        @SuppressWarnings("hiding") PTypeSpec _typeSpec_,
+        @SuppressWarnings("hiding") PFuncReturnTypeSpec _funcReturnTypeSpec_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftParenthesis _leftParenthesis_,
         @SuppressWarnings("hiding") PParams _params_,
@@ -28,7 +28,7 @@ public final class AFuncDecl extends PFuncDecl
         @SuppressWarnings("hiding") PCompoundStmt _compoundStmt_)
     {
         // Constructor
-        setTypeSpec(_typeSpec_);
+        setFuncReturnTypeSpec(_funcReturnTypeSpec_);
 
         setId(_id_);
 
@@ -46,7 +46,7 @@ public final class AFuncDecl extends PFuncDecl
     public Object clone()
     {
         return new AFuncDecl(
-            cloneNode(this._typeSpec_),
+            cloneNode(this._funcReturnTypeSpec_),
             cloneNode(this._id_),
             cloneNode(this._leftParenthesis_),
             cloneNode(this._params_),
@@ -60,16 +60,16 @@ public final class AFuncDecl extends PFuncDecl
         ((Analysis) sw).caseAFuncDecl(this);
     }
 
-    public PTypeSpec getTypeSpec()
+    public PFuncReturnTypeSpec getFuncReturnTypeSpec()
     {
-        return this._typeSpec_;
+        return this._funcReturnTypeSpec_;
     }
 
-    public void setTypeSpec(PTypeSpec node)
+    public void setFuncReturnTypeSpec(PFuncReturnTypeSpec node)
     {
-        if(this._typeSpec_ != null)
+        if(this._funcReturnTypeSpec_ != null)
         {
-            this._typeSpec_.parent(null);
+            this._funcReturnTypeSpec_.parent(null);
         }
 
         if(node != null)
@@ -82,7 +82,7 @@ public final class AFuncDecl extends PFuncDecl
             node.parent(this);
         }
 
-        this._typeSpec_ = node;
+        this._funcReturnTypeSpec_ = node;
     }
 
     public TId getId()
@@ -214,7 +214,7 @@ public final class AFuncDecl extends PFuncDecl
     public String toString()
     {
         return ""
-            + toString(this._typeSpec_)
+            + toString(this._funcReturnTypeSpec_)
             + toString(this._id_)
             + toString(this._leftParenthesis_)
             + toString(this._params_)
@@ -226,9 +226,9 @@ public final class AFuncDecl extends PFuncDecl
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpec_ == child)
+        if(this._funcReturnTypeSpec_ == child)
         {
-            this._typeSpec_ = null;
+            this._funcReturnTypeSpec_ = null;
             return;
         }
 
@@ -269,9 +269,9 @@ public final class AFuncDecl extends PFuncDecl
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpec_ == oldChild)
+        if(this._funcReturnTypeSpec_ == oldChild)
         {
-            setTypeSpec((PTypeSpec) newChild);
+            setFuncReturnTypeSpec((PFuncReturnTypeSpec) newChild);
             return;
         }
 

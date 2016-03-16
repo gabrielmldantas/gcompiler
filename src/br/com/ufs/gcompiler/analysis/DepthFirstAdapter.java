@@ -186,6 +186,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightBracket().apply(this);
         }
+        if(node.getSemi() != null)
+        {
+            node.getSemi().apply(this);
+        }
         outAArrayVarDecl(node);
     }
 
@@ -203,9 +207,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAFuncDecl(AFuncDecl node)
     {
         inAFuncDecl(node);
-        if(node.getTypeSpec() != null)
+        if(node.getFuncReturnTypeSpec() != null)
         {
-            node.getTypeSpec().apply(this);
+            node.getFuncReturnTypeSpec().apply(this);
         }
         if(node.getId() != null)
         {
@@ -293,27 +297,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAIntTypeSpec(node);
     }
 
-    public void inAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAVoidTypeSpec(AVoidTypeSpec node)
-    {
-        inAVoidTypeSpec(node);
-        if(node.getVoid() != null)
-        {
-            node.getVoid().apply(this);
-        }
-        outAVoidTypeSpec(node);
-    }
-
     public void inAStringTypeSpec(AStringTypeSpec node)
     {
         defaultIn(node);
@@ -333,6 +316,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getString().apply(this);
         }
         outAStringTypeSpec(node);
+    }
+
+    public void inAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAFuncReturnTypeSpec(AFuncReturnTypeSpec node)
+    {
+        inAFuncReturnTypeSpec(node);
+        if(node.getTypeSpec() != null)
+        {
+            node.getTypeSpec().apply(this);
+        }
+        outAFuncReturnTypeSpec(node);
+    }
+
+    public void inAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node)
+    {
+        inAVoidFuncReturnTypeSpec(node);
+        if(node.getVoid() != null)
+        {
+            node.getVoid().apply(this);
+        }
+        outAVoidFuncReturnTypeSpec(node);
     }
 
     public void inAParamParams(AParamParams node)
@@ -913,9 +938,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightParenthesis().apply(this);
         }
-        if(node.getStmt() != null)
+        if(node.getOtherStmt() != null)
         {
-            node.getStmt().apply(this);
+            node.getOtherStmt().apply(this);
         }
         outAIterationStmt(node);
     }

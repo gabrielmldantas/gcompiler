@@ -11,7 +11,7 @@ public final class AIterationStmt extends PIterationStmt
     private TLeftParenthesis _leftParenthesis_;
     private PExpression _expression_;
     private TRightParenthesis _rightParenthesis_;
-    private PStmt _stmt_;
+    private POtherStmt _otherStmt_;
 
     public AIterationStmt()
     {
@@ -23,7 +23,7 @@ public final class AIterationStmt extends PIterationStmt
         @SuppressWarnings("hiding") TLeftParenthesis _leftParenthesis_,
         @SuppressWarnings("hiding") PExpression _expression_,
         @SuppressWarnings("hiding") TRightParenthesis _rightParenthesis_,
-        @SuppressWarnings("hiding") PStmt _stmt_)
+        @SuppressWarnings("hiding") POtherStmt _otherStmt_)
     {
         // Constructor
         setWhile(_while_);
@@ -34,7 +34,7 @@ public final class AIterationStmt extends PIterationStmt
 
         setRightParenthesis(_rightParenthesis_);
 
-        setStmt(_stmt_);
+        setOtherStmt(_otherStmt_);
 
     }
 
@@ -46,7 +46,7 @@ public final class AIterationStmt extends PIterationStmt
             cloneNode(this._leftParenthesis_),
             cloneNode(this._expression_),
             cloneNode(this._rightParenthesis_),
-            cloneNode(this._stmt_));
+            cloneNode(this._otherStmt_));
     }
 
     @Override
@@ -155,16 +155,16 @@ public final class AIterationStmt extends PIterationStmt
         this._rightParenthesis_ = node;
     }
 
-    public PStmt getStmt()
+    public POtherStmt getOtherStmt()
     {
-        return this._stmt_;
+        return this._otherStmt_;
     }
 
-    public void setStmt(PStmt node)
+    public void setOtherStmt(POtherStmt node)
     {
-        if(this._stmt_ != null)
+        if(this._otherStmt_ != null)
         {
-            this._stmt_.parent(null);
+            this._otherStmt_.parent(null);
         }
 
         if(node != null)
@@ -177,7 +177,7 @@ public final class AIterationStmt extends PIterationStmt
             node.parent(this);
         }
 
-        this._stmt_ = node;
+        this._otherStmt_ = node;
     }
 
     @Override
@@ -188,7 +188,7 @@ public final class AIterationStmt extends PIterationStmt
             + toString(this._leftParenthesis_)
             + toString(this._expression_)
             + toString(this._rightParenthesis_)
-            + toString(this._stmt_);
+            + toString(this._otherStmt_);
     }
 
     @Override
@@ -219,9 +219,9 @@ public final class AIterationStmt extends PIterationStmt
             return;
         }
 
-        if(this._stmt_ == child)
+        if(this._otherStmt_ == child)
         {
-            this._stmt_ = null;
+            this._otherStmt_ = null;
             return;
         }
 
@@ -256,9 +256,9 @@ public final class AIterationStmt extends PIterationStmt
             return;
         }
 
-        if(this._stmt_ == oldChild)
+        if(this._otherStmt_ == oldChild)
         {
-            setStmt((PStmt) newChild);
+            setOtherStmt((POtherStmt) newChild);
             return;
         }
 

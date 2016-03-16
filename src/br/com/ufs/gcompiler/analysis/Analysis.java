@@ -22,8 +22,9 @@ public interface Analysis extends Switch
     void caseALocalDecl(ALocalDecl node);
     void caseAEmptyLocalDecl(AEmptyLocalDecl node);
     void caseAIntTypeSpec(AIntTypeSpec node);
-    void caseAVoidTypeSpec(AVoidTypeSpec node);
     void caseAStringTypeSpec(AStringTypeSpec node);
+    void caseAFuncReturnTypeSpec(AFuncReturnTypeSpec node);
+    void caseAVoidFuncReturnTypeSpec(AVoidFuncReturnTypeSpec node);
     void caseAParamParams(AParamParams node);
     void caseANoneParams(ANoneParams node);
     void caseASequenceParamList(ASequenceParamList node);
